@@ -1,4 +1,4 @@
-package com.example.chessback.global;
+package com.example.chessback.global.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

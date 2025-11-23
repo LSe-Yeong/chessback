@@ -33,4 +33,13 @@ public class ChessStompController {
                 "LEAVE"
         );
     }
+
+    @MessageMapping("/chess/join")
+    public void joinChessRoom(String roomId) {
+        System.out.println("join detected");
+        messagingTemplate.convertAndSend(
+                "/sub/chess/join/" + roomId,
+                "LEAVE"
+        );
+    }
 }

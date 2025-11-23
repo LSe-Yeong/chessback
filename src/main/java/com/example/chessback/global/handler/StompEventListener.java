@@ -37,7 +37,7 @@ public class StompEventListener {
             if (sessions.size() >= MAX_CONNECTIONS_PER_ROOM) {
                 System.out.println("방이 가득 참 → 연결 거부: " + roomId);
                 messagingTemplate.convertAndSend(
-                        "/sub/chess/status",
+                        "/sub/chess/status/" + roomId,
                         "FULL"
                 );
 

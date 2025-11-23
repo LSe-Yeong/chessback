@@ -10,6 +10,7 @@ public record ChessMoveDto(
         Integer beforeRow,
         Integer beforeCol,
         Integer afterRow,
-        Integer afterCol
+        Integer afterCol,
+        String nextTurn
 ) {
 }

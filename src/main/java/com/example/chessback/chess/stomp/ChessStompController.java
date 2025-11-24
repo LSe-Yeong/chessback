@@ -2,6 +2,7 @@ package com.example.chessback.chess.stomp;
 
 import com.example.chessback.chess.dto.ChessMoveDto;
 import com.example.chessback.chess.dto.JoinRoomDto;
+import com.example.chessback.chess.dto.StatusDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -48,6 +49,14 @@ public class ChessStompController {
         messagingTemplate.convertAndSend(
                 "/sub/chess/join/" + joinRoomDto.roomId() + "/" + type,
                 joinRoomDto
+        );
+    }
+
+    @MessageMapping("/chess/status")
+    public void statusRoom(@RequestBody StatusDto statusDto) {
+        messagingTemplate.convertAndSend(
+                "/sub/chess/status/" + statusDto.roomId(),
+                statusDto
         );
     }
 }

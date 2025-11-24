@@ -1,6 +1,7 @@
 package com.example.chessback.chess.stomp;
 
 import com.example.chessback.chess.dto.ChessMoveDto;
+import com.example.chessback.chess.dto.JoinRoomDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -35,11 +36,18 @@ public class ChessStompController {
     }
 
     @MessageMapping("/chess/join")
-    public void joinChessRoom(String roomId) {
+    public void joinChessRoom(@RequestBody JoinRoomDto joinRoomDto) {
         System.out.println("join detected");
+        String type = "";
+        if (joinRoomDto.type().equals("JOIN")) {
+            type = "WAITING";
+        } else {
+            type = "JOIN";
+        }
+
         messagingTemplate.convertAndSend(
-                "/sub/chess/join/" + roomId,
-                "LEAVE"
+                "/sub/chess/join/" + joinRoomDto.roomId() + "/" + type,
+                joinRoomDto
         );
     }
 }
